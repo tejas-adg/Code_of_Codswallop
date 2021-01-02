@@ -10,6 +10,8 @@ Pass two strings using command line and it will print the result of each method
 
 As always, to include spaces enclose the word in double quotes
 
+To utilize the file and run your own tests, see `Csv_input.py`
+
 ## Documentation
 
 The program mainly uses [Cosine Similarity](https://www.google.com/search?q=cosine+similarity) but with different vectorizers, so basically it is a test of different vectorizers with the cosine similarity technique.
