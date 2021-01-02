@@ -18,7 +18,12 @@ def compare_words1(string1, string2):
     return cosine_similarity(tf_idf_matrix)[0][1]
 
 def compare_words2(string1, string2):
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(analyzer = 'word')
+    tf_idf_matrix = vectorizer.fit_transform([string1, string2])
+    return cosine_similarity(tf_idf_matrix)[0][1]
+
+def compare_words3(string1, string2):
+    vectorizer = TfidfVectorizer(analyzer = 'char')
     tf_idf_matrix = vectorizer.fit_transform([string1, string2])
     return cosine_similarity(tf_idf_matrix)[0][1]
 
@@ -35,8 +40,34 @@ def my_vectorizer(string1, string2):
     return lis
 
 
-def compare_words3(string1, string2):
+def compare_words4(string1, string2):
     return cosine_similarity(np.array(my_vectorizer(string1, string2)))[0][1]
+
+def my_word_vectorizer(string1, string2):
+    words = list(set(string1.split(' ') + string2.split(' ')))
+    lis = []
+    big_word_list = string1.split(' ') + string2.split(' ')
+    for _str in [string1, string2]:
+        l = []
+        for word in words:
+            l.append(_str.split(' ').count(word))
+        lis.append(l)
+
+    return lis
+
+def compare_words5(string1, string2):
+    return cosine_similarity(np.array(my_word_vectorizer(string1, string2)))[0][1]
+
+def run_all(str1, str2):
+    if not all([type(_str) == str for _str in [str1, str2]]):
+        print("Please pass strings only")
+        sys.exit(-1)
+    print(f'String1 :- {str1}\nString2 :- {str2}')
+    print(f'Method1 (tfidf custom n-grams):- {compare_words1(str1, str2)}')
+    print(f'Method2 (tfidf word analyzer) :- {compare_words2(str1, str2)}')
+    print(f'Method3 (tfidf char analyzer) :- {compare_words3(str1, str2)}')
+    print(f'Method4 (my char vectorizer)  :- {compare_words4(str1, str2)}')
+    print(f'Method5 (my word vectorizer)  :- {compare_words5(str1, str2)}')
 
 
 if __name__ == '__main__':
@@ -45,7 +76,8 @@ if __name__ == '__main__':
     if not all([type(_str) == str for _str in [s1, s2]]):
         print("Please pass strings only")
         sys.exit(-1)
-    print(f'String1 :- {s1}\nString2 :- {s2}')
-    print(f'Method1 :- {compare_words1(s1, s2)}')
-    print(f'Method2 :- {compare_words2(s1, s2)}')
-    print(f'Method3 :- {compare_words3(s1, s2)}')
+    if len(sys.argv) >= 4:
+        if sys.argv[3]:
+            print(f'String1 n-grams :- {ngrams(s1)}\nString2 n-grams :- {ngrams(s2)}')
+
+    run_all(s1, s2)
