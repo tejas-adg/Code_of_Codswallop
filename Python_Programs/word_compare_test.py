@@ -22,7 +22,7 @@ def compare_words2(string1, string2):
     return cosine_similarity(tf_idf_matrix)[0][1]
 
 def my_vectorizer(string1, string2):
-    letters = set(string1 + string2)
+    letters = set(string1 + string2) #commit test
     lis = []
     for _str in [string1, string2]:
         l = []
