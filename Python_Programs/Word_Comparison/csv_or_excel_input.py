@@ -11,7 +11,7 @@ except UnicodeDecodeError:
 
 for row in range(df.shape[0]):
     if pd.isna(df.loc[row, 'TfIdf_Custom_n-gram']):
-        print(f'{row + 1} is empty')
+        print(f'{row + 2} is empty')
         df.loc[row, 'TfIdf_Custom_n-gram'] = word_compare_test.compare_words1(df.loc[row, 'String1'], df.loc[row, 'String2'])
         df.loc[row, 'TfIdf_word_analyzer'] = word_compare_test.compare_words2(df.loc[row, 'String1'], df.loc[row, 'String2'])
         df.loc[row, 'TfIdf_char_analyzer'] = word_compare_test.compare_words3(df.loc[row, 'String1'], df.loc[row, 'String2'])
