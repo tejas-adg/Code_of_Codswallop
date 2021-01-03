@@ -1,0 +1,13 @@
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\bin\Debug\netcoreapp3.1\helloworld.exe
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\bin\Debug\netcoreapp3.1\helloworld.deps.json
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\bin\Debug\netcoreapp3.1\helloworld.runtimeconfig.json
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\bin\Debug\netcoreapp3.1\helloworld.runtimeconfig.dev.json
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\bin\Debug\netcoreapp3.1\helloworld.dll
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\bin\Debug\netcoreapp3.1\helloworld.pdb
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\obj\Debug\netcoreapp3.1\helloworld.csprojAssemblyReference.cache
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\obj\Debug\netcoreapp3.1\helloworld.AssemblyInfoInputs.cache
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\obj\Debug\netcoreapp3.1\helloworld.AssemblyInfo.cs
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\obj\Debug\netcoreapp3.1\helloworld.csproj.CoreCompileInputs.cache
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\obj\Debug\netcoreapp3.1\helloworld.dll
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\obj\Debug\netcoreapp3.1\helloworld.pdb
+E:\Github_Clones\Code_of_Codswallop\C#_Programs\Hello_World\helloworld\helloworld\obj\Debug\netcoreapp3.1\helloworld.genruntimeconfig.cache
