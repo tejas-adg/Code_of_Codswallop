@@ -4,6 +4,8 @@ The constructors are called in the same order they are in the code whereas the d
 
 Constructors - FILO (First In Last Out)
 Destructor - LIFO (Last In First Out)
+
+I wrote most of this code in ninth and tenth grade so please excuse the bad coding practices
 */
 #include <iostream>
 using namespace std;
