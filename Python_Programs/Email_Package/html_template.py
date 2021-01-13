@@ -11,9 +11,6 @@ def italic(text):
 def underline(text):
     return '<u>' + text + '</u>'
 
-def break():
-    return '<br>'
-
 def newLine():
     return '<br>'
 
