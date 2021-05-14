@@ -17,7 +17,18 @@ public:
 	void setData(T);
 	Single_Link_Node<T>* getNextNode(void);
 	void setNextNode(Single_Link_Node<T>*);
+	static Single_Link_Node<T>* createNode(T);
 };
+
+template<typename T>
+Single_Link_Node<T>* Single_Link_Node<T>::createNode(T Obj)
+{
+	Single_Link_Node<T>* new_node_ptr = new Single_Link_Node<T>();
+	new_node_ptr->setData(Obj);
+	new_node_ptr->setNextNode(nullptr);
+
+	return new_node_ptr;
+}
 
 template<typename T>
 Single_Link_Node<T>::Single_Link_Node()

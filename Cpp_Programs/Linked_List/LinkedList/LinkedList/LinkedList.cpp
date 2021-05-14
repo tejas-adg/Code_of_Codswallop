@@ -4,41 +4,31 @@ using namespace std;
 
 int main()
 {
-	Single_Linked_List<int> s_ll;
+	Single_Linked_List<char> s_ll;
 
-	Single_Link_Node<int>* new_sln_ptr = new Single_Link_Node<int>();
-	new_sln_ptr->setData(0);
+	s_ll.addItem(Single_Link_Node<char>::createNode('t'));
 
-	s_ll.addItem(new_sln_ptr);
+	s_ll.addItem(Single_Link_Node<char>::createNode('e'), 1);
 
-	//s_ll.Print_List(); cout << endl;
+	s_ll.addItem(Single_Link_Node<char>::createNode('j'), 2);
 
-	new_sln_ptr = new Single_Link_Node<int>();
-	new_sln_ptr->setData(1);
+	s_ll.addItem(Single_Link_Node<char>::createNode('a'), 3);
 
-	s_ll.addItem(new_sln_ptr, 1);
+	s_ll.addItem(Single_Link_Node<char>::createNode('s'), 4);
 
-	//s_ll.Print_List(); cout << endl;
+	s_ll.addItem(Single_Link_Node<char>::createNode('Z'), 3);
+	
+	s_ll.Print_List(); cout << endl;
 
-	new_sln_ptr = new Single_Link_Node<int>();
-	new_sln_ptr->setData(2);
+	delete s_ll.removeItemByPosition(-2);
 
-	s_ll.addItem(new_sln_ptr, 2);
+	s_ll.Print_List(); cout << endl;
 
-	new_sln_ptr = new Single_Link_Node<int>();
-	new_sln_ptr->setData(3);
+	delete s_ll.removeItemByPosition(-4);
 
-	s_ll.addItem(new_sln_ptr, 3);
+	s_ll.Print_List(); cout << endl;
 
-	new_sln_ptr = new Single_Link_Node<int>();
-	new_sln_ptr->setData(4);
-
-	s_ll.addItem(new_sln_ptr, 4);
-
-	new_sln_ptr = new Single_Link_Node<int>();
-	new_sln_ptr->setData(5);
-
-	s_ll.addItem(new_sln_ptr, 3);
+	delete s_ll.removeItemByPosition(-1);
 
 	s_ll.Print_List(); cout << endl;
 }
