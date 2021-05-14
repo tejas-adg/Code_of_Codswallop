@@ -9,6 +9,7 @@ template<typename T>
 class Single_Linked_List
 {
 private:
+	Single_Link_Node<T>* tail;
 	Single_Link_Node<T>* head;
 	int number_of_nodes;
 
@@ -20,12 +21,60 @@ public:
 	Single_Link_Node<T>* removeItemByPosition(int pos = 0);
 	Single_Link_Node<T>* removeItemByData(T* _obj = nullptr);
 	Single_Link_Node<T>* removeItemByData(T obj);
-	Single_Link_Node<T>* searchByData(T obj);
+	Single_Link_Node<T>* searchByData(T obj, int* ret_pos = nullptr);
 	Single_Link_Node<T>* searchByPosition(int pos = 0);
 	int getNumberOfNodes(void);
 	void Print_List(void);
 	bool isEmpty(void);
 };
+
+template<typename T>
+Single_Link_Node<T>* Single_Linked_List<T>::searchByPosition(int pos)
+{
+	if ((pos == 0) || (pos == (-1 * (number_of_nodes))))
+	{
+		return head;
+	}
+	else
+	{
+		Single_Link_Node<T>* curr_node = head;
+		int curr_pos = 0;
+
+		while (curr_node != nullptr)
+		{
+			if (curr_pos == pos)
+			{
+				break;
+			}
+			curr_node = curr_node->getNextNode();
+			curr_pos++;
+		}
+
+		return curr_node;
+	}
+}
+
+template<typename T>
+Single_Link_Node<T>* Single_Linked_List<T>::searchByData(T obj, int* ret_pos)
+{
+	Single_Link_Node<T>* curr_node = head;
+	int curr_pos = 0;
+
+	while (curr_node != nullptr)
+	{
+		if (curr_node->getData() == obj)
+		{
+			break;
+		}
+
+		curr_node = curr_node->getNextNode();
+		curr_pos++;
+	}
+
+	(*ret_pos) = curr_pos;
+
+	return curr_node;
+}
 
 template<typename T>
 Single_Link_Node<T>* Single_Linked_List<T>::removeItemByData(T obj)

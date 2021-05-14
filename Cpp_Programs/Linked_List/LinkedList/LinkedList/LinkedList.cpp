@@ -20,15 +20,11 @@ int main()
 	
 	s_ll.Print_List(); cout << endl;
 
-	delete s_ll.removeItemByPosition(-2);
+	delete s_ll.removeItemByPosition(-3);
 
-	s_ll.Print_List(); cout << endl;
+	s_ll.addItem(Single_Link_Node<char>::createNode('a'), -1);
 
-	delete s_ll.removeItemByPosition(-4);
-
-	s_ll.Print_List(); cout << endl;
-
-	delete s_ll.removeItemByPosition(-1);
+	s_ll.addItem(Single_Link_Node<char>::createNode('m'), -1);
 
 	s_ll.Print_List(); cout << endl;
 }
