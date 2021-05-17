@@ -107,6 +107,11 @@ Single_Link_Node<T>* Single_Linked_List<T>::removeItemByPosition(int pos)
 		Single_Link_Node<T>* temp_node = curr_node->getNextNode();
 		curr_node->setNextNode(curr_node->getNextNode()->getNextNode());
 
+		if (temp_node == tail)
+		{
+			tail = curr_node;
+		}
+
 		number_of_nodes--;
 
 		return temp_node;
@@ -138,6 +143,11 @@ Single_Link_Node<T>* Single_Linked_List<T>::removeItemByData(T* _obj)
 	{
 		prev_node->setNextNode(curr_node->getNextNode());
 
+		if (curr_node == tail)
+		{
+			tail = prev_node;
+		}
+
 		number_of_nodes--;
 
 		return curr_node;
@@ -154,6 +164,7 @@ template<typename T>
 Single_Linked_List<T>::Single_Linked_List()
 {
 	head = nullptr;
+	tail = nullptr;
 	number_of_nodes = 0;
 }
 
@@ -182,10 +193,24 @@ void Single_Linked_List<T>::addItem(Single_Link_Node<T>* node_ptr, int pos)
 		return;
 	}
 
-	if ((pos == 0) || isEmpty() || (pos == (-1 * (number_of_nodes + 1))))
+	if (isEmpty())
+	{
+		head = node_ptr;
+		tail = node_ptr;
+		number_of_nodes++;
+		return;
+	}
+	else if ((pos == 0) || (pos == (-1 * (number_of_nodes + 1))))
 	{
 		node_ptr->setNextNode(head);
 		head = node_ptr;
+		number_of_nodes++;
+		return;
+	}
+	else if ((pos == -1) || (pos == number_of_nodes))
+	{
+		tail->setNextNode(node_ptr);
+		tail = node_ptr;
 		number_of_nodes++;
 		return;
 	}
@@ -210,6 +235,11 @@ void Single_Linked_List<T>::addItem(Single_Link_Node<T>* node_ptr, int pos)
 template<typename T>
 void Single_Linked_List<T>::Print_List()
 {
+	if (isEmpty())
+	{
+		std::cout << "List is empty";
+	}
+
 	Single_Link_Node<T>* temp = head;
 
 	while (temp != nullptr)
