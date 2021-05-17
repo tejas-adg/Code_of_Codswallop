@@ -21,7 +21,7 @@ public:
 	Single_Link_Node<T>* removeItemByPosition(int pos = 0);
 	Single_Link_Node<T>* removeItemByData(T* _obj = nullptr);
 	Single_Link_Node<T>* removeItemByData(T obj);
-	Single_Link_Node<T>* searchByData(T obj, int* ret_pos = nullptr);
+	Single_Link_Node<T>* searchByData(T obj, int* ret_pos = nullptr, Single_Link_Node<T>** one_prev_node = nullptr);
 	Single_Link_Node<T>* searchByPosition(int pos = 0);
 	int getNumberOfNodes(void);
 	void Clear_List(void);
@@ -95,9 +95,10 @@ Single_Link_Node<T>* Single_Linked_List<T>::searchByPosition(int pos)
 }
 
 template<typename T>
-Single_Link_Node<T>* Single_Linked_List<T>::searchByData(T obj, int* ret_pos)
+Single_Link_Node<T>* Single_Linked_List<T>::searchByData(T obj, int* ret_pos, Single_Link_Node<T>** one_prev_node)
 {
 	Single_Link_Node<T>* curr_node = head;
+	Single_Link_Node<T>* prev_node = nullptr;
 	int curr_pos = 0;
 
 	while (curr_node != nullptr)
@@ -107,11 +108,20 @@ Single_Link_Node<T>* Single_Linked_List<T>::searchByData(T obj, int* ret_pos)
 			break;
 		}
 
+		prev_node = curr_node;
 		curr_node = curr_node->getNextNode();
 		curr_pos++;
 	}
 
-	(*ret_pos) = curr_pos;
+	if (one_prev_node != nullptr)
+	{
+		(*one_prev_node) = prev_node;
+	}
+
+	if (ret_pos != nullptr)
+	{
+		(*ret_pos) = curr_pos;
+	}
 
 	return curr_node;
 }
@@ -161,36 +171,34 @@ Single_Link_Node<T>* Single_Linked_List<T>::removeItemByPosition(int pos)
 template<typename T>
 Single_Link_Node<T>* Single_Linked_List<T>::removeItemByData(T* _obj)
 {
-	Single_Link_Node<T>* curr_node = head;
+	Single_Link_Node<T>* retn_node = head;
 	Single_Link_Node<T>* prev_node = nullptr;
 
-	while (curr_node != nullptr)
-	{
-		if (curr_node->getData() == (*_obj))
-		{
-			break;
-		}
+	retn_node = searchByData(*_obj, nullptr, &prev_node);
 
-		prev_node = curr_node;
-		curr_node = curr_node->getNextNode();
-	}
-
-	if (curr_node == nullptr)
+	if (retn_node == nullptr)
 	{
 		return nullptr;
 	}
+	else if (retn_node == head)
+	{
+		head = head->getNextNode();
+		number_of_nodes--;
+		return retn_node;
+	}
+	else if (retn_node == tail)
+	{
+		tail = prev_node;
+		number_of_nodes--;
+		return retn_node;
+	}
 	else
 	{
-		prev_node->setNextNode(curr_node->getNextNode());
-
-		if (curr_node == tail)
-		{
-			tail = prev_node;
-		}
+		prev_node->setNextNode(retn_node->getNextNode());
 
 		number_of_nodes--;
 
-		return curr_node;
+		return retn_node;
 	}
 }
 

@@ -32,11 +32,11 @@ int main()
 
 	s_ll.Print_List(); cout << endl;
 
-	delete s_ll.removeItemByPosition(3);
+	delete s_ll.removeItemByData('a');
 	
 	s_ll.Print_List(); cout << endl;
 
-	delete s_ll.removeItemByPosition(2);
+	delete s_ll.removeItemByData('t');
 
 	s_ll.Print_List(); cout << endl;
 
