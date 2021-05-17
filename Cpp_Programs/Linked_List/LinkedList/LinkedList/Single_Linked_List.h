@@ -5,24 +5,39 @@
 #include "Nodes.h"
 #include <iostream>
 
+#ifndef POINTER_DECLARING_SYMBOL
+#define POINTER_DECLARING_SYMBOL *
+#endif
+
+#ifndef POINTER_TO_POINTER_DECLARING_SYMBOL
+#define POINTER_TO_POINTER_DECLARING_SYMBOL **
+#endif
+
+#ifndef DECLARE_NODE_POINTER
+#define DECLARE_NODE_POINTER Single_Link_Node<T>##POINTER_DECLARING_SYMBOL
+#endif
+
+#ifndef DECLARE_POINTER_TO_NODE_POINTER
+#define DECLARE_POINTER_TO_NODE_POINTER Single_Link_Node<T>##POINTER_TO_POINTER_DECLARING_SYMBOL
+#endif
+
 template<typename T>
 class Single_Linked_List
 {
 private:
-	Single_Link_Node<T>* tail;
-	Single_Link_Node<T>* head;
+	DECLARE_NODE_POINTER tail;
+	DECLARE_NODE_POINTER head;
 	int number_of_nodes;
 
 public:
 	Single_Linked_List();
 	~Single_Linked_List();
 
-	void addItem(Single_Link_Node<T>* node_ptr, int pos = 0);
-	Single_Link_Node<T>* removeItemByPosition(int pos = 0);
-	Single_Link_Node<T>* removeItemByData(T* _obj = nullptr);
-	Single_Link_Node<T>* removeItemByData(T obj);
-	Single_Link_Node<T>* searchByData(T obj, int* ret_pos = nullptr, Single_Link_Node<T>** one_prev_node = nullptr);
-	Single_Link_Node<T>* searchByPosition(int pos = 0);
+	void addItem(DECLARE_NODE_POINTER node_ptr, int pos = 0);
+	DECLARE_NODE_POINTER removeItemByPosition(int pos = 0);
+	DECLARE_NODE_POINTER removeItemByData(T obj);
+	DECLARE_NODE_POINTER searchByData(T POINTER_DECLARING_SYMBOL _obj, int POINTER_DECLARING_SYMBOL ret_pos = nullptr, DECLARE_POINTER_TO_NODE_POINTER one_prev_node = nullptr);
+	DECLARE_NODE_POINTER searchByPosition(int pos = 0, DECLARE_POINTER_TO_NODE_POINTER one_prev_node = nullptr);
 	int getNumberOfNodes(void);
 	void Clear_List(void);
 	void Reverse_List(void);
@@ -33,9 +48,9 @@ public:
 template<typename T>
 void Single_Linked_List<T>::Reverse_List()
 {
-	Single_Link_Node<T>* curr_node = head;
-	Single_Link_Node<T>* prev_node = nullptr;
-	Single_Link_Node<T>* next_node = head->getNextNode();;
+	DECLARE_NODE_POINTER curr_node = head;
+	DECLARE_NODE_POINTER prev_node = nullptr;
+	DECLARE_NODE_POINTER next_node = head->getNextNode();;
 	tail = head;
 
 	while (curr_node != nullptr)
@@ -54,8 +69,8 @@ void Single_Linked_List<T>::Reverse_List()
 template<typename T>
 void Single_Linked_List<T>::Clear_List()
 {
-	Single_Link_Node<T>* curr_node = head;
-	Single_Link_Node<T>* prev_node = nullptr;
+	DECLARE_NODE_POINTER curr_node = head;
+	DECLARE_NODE_POINTER prev_node = nullptr;
 
 	while (curr_node != nullptr)
 	{
@@ -69,15 +84,20 @@ void Single_Linked_List<T>::Clear_List()
 }
 
 template<typename T>
-Single_Link_Node<T>* Single_Linked_List<T>::searchByPosition(int pos)
+DECLARE_NODE_POINTER Single_Linked_List<T>::searchByPosition(int pos, DECLARE_POINTER_TO_NODE_POINTER one_prev_node)
 {
 	if ((pos == 0) || (pos == (-1 * (number_of_nodes))))
 	{
 		return head;
 	}
+	else if ((pos == -1) || (pos == number_of_nodes))
+	{
+		return tail;
+	}
 	else
 	{
-		Single_Link_Node<T>* curr_node = head;
+		DECLARE_NODE_POINTER curr_node = head;
+		DECLARE_NODE_POINTER prev_node = nullptr;
 		int curr_pos = 0;
 
 		while (curr_node != nullptr)
@@ -86,8 +106,14 @@ Single_Link_Node<T>* Single_Linked_List<T>::searchByPosition(int pos)
 			{
 				break;
 			}
+			prev_node = curr_node;
 			curr_node = curr_node->getNextNode();
 			curr_pos++;
+		}
+
+		if (one_prev_node != nullptr)
+		{
+			(*one_prev_node) = prev_node;
 		}
 
 		return curr_node;
@@ -95,15 +121,15 @@ Single_Link_Node<T>* Single_Linked_List<T>::searchByPosition(int pos)
 }
 
 template<typename T>
-Single_Link_Node<T>* Single_Linked_List<T>::searchByData(T obj, int* ret_pos, Single_Link_Node<T>** one_prev_node)
+DECLARE_NODE_POINTER Single_Linked_List<T>::searchByData(T POINTER_DECLARING_SYMBOL _obj, int POINTER_DECLARING_SYMBOL ret_pos, DECLARE_POINTER_TO_NODE_POINTER one_prev_node)
 {
-	Single_Link_Node<T>* curr_node = head;
-	Single_Link_Node<T>* prev_node = nullptr;
+	DECLARE_NODE_POINTER curr_node = head;
+	DECLARE_NODE_POINTER prev_node = nullptr;
 	int curr_pos = 0;
 
 	while (curr_node != nullptr)
 	{
-		if (curr_node->getData() == obj)
+		if (curr_node->getData() == (*_obj))
 		{
 			break;
 		}
@@ -127,25 +153,18 @@ Single_Link_Node<T>* Single_Linked_List<T>::searchByData(T obj, int* ret_pos, Si
 }
 
 template<typename T>
-Single_Link_Node<T>* Single_Linked_List<T>::removeItemByData(T obj)
-{
-	T temp = obj;
-	return removeItemByData(&temp);
-}
-
-template<typename T>
-Single_Link_Node<T>* Single_Linked_List<T>::removeItemByPosition(int pos)
+DECLARE_NODE_POINTER Single_Linked_List<T>::removeItemByPosition(int pos)
 {
 	if ((pos == 0) || (pos == (-1 * (number_of_nodes))))
 	{
-		Single_Link_Node<T>* curr_node = head;
+		DECLARE_NODE_POINTER curr_node = head;
 		head = head->getNextNode();
 		number_of_nodes--;
 		return curr_node;
 	}
 	else
 	{
-		Single_Link_Node<T>* curr_node = head;
+		DECLARE_NODE_POINTER curr_node = head;
 		int curr_pos = 0;
 
 		while ((curr_node != nullptr) && (curr_pos < ((pos >= 0) ? (pos - 1) : (number_of_nodes + (pos - 1)))))
@@ -154,7 +173,7 @@ Single_Link_Node<T>* Single_Linked_List<T>::removeItemByPosition(int pos)
 			curr_pos++;
 		}
 
-		Single_Link_Node<T>* temp_node = curr_node->getNextNode();
+		DECLARE_NODE_POINTER temp_node = curr_node->getNextNode();
 		curr_node->setNextNode(curr_node->getNextNode()->getNextNode());
 
 		if (temp_node == tail)
@@ -169,12 +188,12 @@ Single_Link_Node<T>* Single_Linked_List<T>::removeItemByPosition(int pos)
 }
 
 template<typename T>
-Single_Link_Node<T>* Single_Linked_List<T>::removeItemByData(T* _obj)
+DECLARE_NODE_POINTER Single_Linked_List<T>::removeItemByData(T obj)
 {
-	Single_Link_Node<T>* retn_node = head;
-	Single_Link_Node<T>* prev_node = nullptr;
+	DECLARE_NODE_POINTER retn_node = head;
+	DECLARE_NODE_POINTER prev_node = nullptr;
 
-	retn_node = searchByData(*_obj, nullptr, &prev_node);
+	retn_node = searchByData(&obj, nullptr, &prev_node);
 
 	if (retn_node == nullptr)
 	{
@@ -219,8 +238,8 @@ Single_Linked_List<T>::Single_Linked_List()
 template<typename T>
 Single_Linked_List<T>::~Single_Linked_List()
 {
-	Single_Link_Node<T>* curr_node = head;
-	Single_Link_Node<T>* prev_node = nullptr;
+	DECLARE_NODE_POINTER curr_node = head;
+	DECLARE_NODE_POINTER prev_node = nullptr;
 
 	while (curr_node != nullptr)
 	{
@@ -234,7 +253,7 @@ Single_Linked_List<T>::~Single_Linked_List()
 }
 
 template<typename T>
-void Single_Linked_List<T>::addItem(Single_Link_Node<T>* node_ptr, int pos)
+void Single_Linked_List<T>::addItem(DECLARE_NODE_POINTER node_ptr, int pos)
 {
 	if (node_ptr == nullptr)
 	{
@@ -264,7 +283,7 @@ void Single_Linked_List<T>::addItem(Single_Link_Node<T>* node_ptr, int pos)
 	}
 	else
 	{
-		Single_Link_Node<T>* curr_node = head;
+		DECLARE_NODE_POINTER curr_node = head;
 		int curr_pos = 0;
 
 		while ((curr_node != nullptr) && (curr_pos < ((pos >= 0) ? (pos - 1) : (number_of_nodes + pos))))
@@ -288,7 +307,7 @@ void Single_Linked_List<T>::Print_List()
 		std::cout << "List is empty";
 	}
 
-	Single_Link_Node<T>* temp = head;
+	DECLARE_NODE_POINTER temp = head;
 
 	while (temp != nullptr)
 	{
