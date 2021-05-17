@@ -33,9 +33,22 @@ public:
 template<typename T>
 void Single_Linked_List<T>::Reverse_List()
 {
-	Single_Link_Node<T>* temp_var = head;
-	head = tail;
-	tail = temp_var;
+	Single_Link_Node<T>* curr_node = head;
+	Single_Link_Node<T>* prev_node = nullptr;
+	Single_Link_Node<T>* next_node = head->getNextNode();;
+	tail = head;
+
+	while (curr_node != nullptr)
+	{
+		next_node = curr_node->getNextNode();
+
+		curr_node->setNextNode(prev_node);
+
+		prev_node = curr_node;
+		curr_node = next_node;
+	}
+
+	head = prev_node;
 }
 
 template<typename T>

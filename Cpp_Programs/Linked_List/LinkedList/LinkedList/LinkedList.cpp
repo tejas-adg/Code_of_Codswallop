@@ -20,9 +20,15 @@ int main()
 	
 	s_ll.Print_List(); cout << endl;
 
-	s_ll.Clear_List();
+	delete s_ll.removeItemByPosition(1);
 
-	/*delete s_ll.removeItemByPosition(1);
+	s_ll.Print_List(); cout << endl;
+
+	s_ll.Reverse_List();
+
+	s_ll.Print_List(); cout << endl;
+
+	s_ll.Reverse_List();
 
 	s_ll.Print_List(); cout << endl;
 
@@ -36,7 +42,7 @@ int main()
 
 	delete s_ll.removeItemByPosition(0);
 	delete s_ll.removeItemByPosition(-1);
-	delete s_ll.removeItemByPosition(0);*/
+	delete s_ll.removeItemByPosition(0);
 
 	s_ll.Print_List(); cout << endl;
 
