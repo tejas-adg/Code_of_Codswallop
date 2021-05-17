@@ -24,9 +24,36 @@ public:
 	Single_Link_Node<T>* searchByData(T obj, int* ret_pos = nullptr);
 	Single_Link_Node<T>* searchByPosition(int pos = 0);
 	int getNumberOfNodes(void);
+	void Clear_List(void);
+	void Reverse_List(void);
 	void Print_List(void);
 	bool isEmpty(void);
 };
+
+template<typename T>
+void Single_Linked_List<T>::Reverse_List()
+{
+	Single_Link_Node<T>* temp_var = head;
+	head = tail;
+	tail = temp_var;
+}
+
+template<typename T>
+void Single_Linked_List<T>::Clear_List()
+{
+	Single_Link_Node<T>* curr_node = head;
+	Single_Link_Node<T>* prev_node = nullptr;
+
+	while (curr_node != nullptr)
+	{
+		prev_node = curr_node;
+		curr_node = curr_node->getNextNode();
+		delete prev_node;
+	}
+
+	head = nullptr;
+	number_of_nodes = 0;
+}
 
 template<typename T>
 Single_Link_Node<T>* Single_Linked_List<T>::searchByPosition(int pos)
