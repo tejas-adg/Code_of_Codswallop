@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main()
+char main()
 {
 	Single_Linked_List<char> s_ll;
 
