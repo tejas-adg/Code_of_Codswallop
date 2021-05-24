@@ -142,6 +142,7 @@
     <ClCompile Include="LinkedList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Doubly_Linked_List.h" />
     <ClInclude Include="Nodes.h" />
     <ClInclude Include="Single_Linked_List.h" />
   </ItemGroup>
