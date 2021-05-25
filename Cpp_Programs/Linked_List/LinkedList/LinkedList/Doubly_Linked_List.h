@@ -19,8 +19,8 @@ public:
 
 	Double_Link_Node<T>* removeItemByPosition(int pos = 0);
 	Double_Link_Node<T>* removeItemByData(T obj);
-	Double_Link_Node<T>* searchByData(T* _obj, int* ret_pos = nullptr, Double_Link_Node<T>** one_prev_node = nullptr);
-	Double_Link_Node<T>* searchByPosition(int pos = 0, Double_Link_Node<T>** one_prev_node = nullptr);
+	Double_Link_Node<T>* searchByData(T* _obj, int* ret_pos = nullptr);
+	Double_Link_Node<T>* searchByPosition(int pos = 0);
 	int getNumberOfNodes(void);
 	void addItem(Double_Link_Node<T>* node_ptr, int pos = 0);
 	void Clear_List(void);
@@ -28,6 +28,38 @@ public:
 	void Print_List(void);
 	bool isEmpty(void);
 };
+
+template<typename T>
+Double_Link_Node<T>* Doubly_Linked_List<T>::searchByPosition(int pos)
+{
+	Double_Link_Node<T>* temp = nullptr;
+	int curr_pos = 0;
+
+	if (pos <= ((pos > 0) ? (int)(number_of_nodes / 2) : (-1 * ((int)(number_of_nodes / 2) + 1))))
+	{
+		temp = head;
+		curr_pos = (pos > 0) ? 0 : (-1 * number_of_nodes);
+
+		while ((temp != nullptr) && (curr_pos < ((pos > 0) ? (pos) : (pos + 1))))
+		{
+			temp = temp->getNextNode();
+			curr_pos++;
+		}
+	}
+	else
+	{
+		temp = tail;
+		curr_pos = (pos > 0) ? (number_of_nodes - 1) : -2;
+
+		while ((temp != nullptr) && (curr_pos > pos))
+		{
+			temp = temp->getPreviousNode();
+			curr_pos--;
+		}
+	}
+
+	return temp;
+}
 
 template<typename T>
 void Doubly_Linked_List<T>::addItem(Double_Link_Node<T>* node_ptr, int pos)
@@ -62,31 +94,7 @@ void Doubly_Linked_List<T>::addItem(Double_Link_Node<T>* node_ptr, int pos)
 	}
 	else
 	{
-		Double_Link_Node<T>* curr_node = nullptr;
-		int curr_pos = 0;
-
-		if (pos <= ((pos > 0) ? (int)(number_of_nodes / 2) : (-1 * ((int)(number_of_nodes / 2) + 1))))
-		{
-			curr_node = head;
-			curr_pos = (pos > 0) ? 0 : (-1 * number_of_nodes);
-
-			while ((curr_node != nullptr) && (curr_pos < ((pos > 0) ? (pos) : (pos + 1))))
-			{
-				curr_node = curr_node->getNextNode();
-				curr_pos++;
-			}
-		}
-		else
-		{
-			curr_node = tail;
-			curr_pos = (pos > 0) ? (number_of_nodes - 1) : -2;
-
-			while ((curr_node != nullptr) && (curr_pos > pos))
-			{
-				curr_node = curr_node->getPreviousNode();
-				curr_pos--;
-			}
-		}
+		Double_Link_Node<T>* curr_node = searchByPosition(pos);
 
 		node_ptr->setPreviousNode(curr_node->getPreviousNode());
 		node_ptr->setNextNode(curr_node);
