@@ -19,11 +19,29 @@ int main()
 
 	d_ll.addItem(Double_Link_Node<char>::create_node('M'), 5);
 
-	d_ll.Print_List(); cout << endl;
-
 	d_ll.addItem(Double_Link_Node<char>::create_node('A'), 5);
 
 	d_ll.Print_List(); cout << endl;
+
+	/*d_ll.addItem(Double_Link_Node<char>::create_node('Z'), 4);
+
+	d_ll.Print_List(); cout << endl;*/
+
+	/*delete d_ll.removeItemByPosition();
+	delete d_ll.removeItemByPosition(-1);
+	delete d_ll.removeItemByPosition(3);
+	delete d_ll.removeItemByPosition(-2);
+	delete d_ll.removeItemByPosition(2);
+	delete d_ll.removeItemByPosition(1);
+	delete d_ll.removeItemByPosition(0);
+
+	d_ll.Print_List(); cout << endl;*/
+
+	char temp = 's';
+	int pos = 0;
+	Double_Link_Node<char>* ret_node = d_ll.searchByData(&temp, &pos);
+
+	cout << "Found '" << temp << "' at " << pos << endl;
 
 	return 0;
 }
