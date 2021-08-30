@@ -6,4 +6,3 @@ people = ["Nikhil", "Tejas", "Dylan", "Supran"]
 do_loop = True
 while do_loop:
 	do_loop = interpret_Yes_No(input("Do you wish to continue? (Y/N): "))
-	pass
